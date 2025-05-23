@@ -1,8 +1,4 @@
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Textarea } from '@/components/ui/textarea'
-import { Input } from '@/components/ui/input'
-import { Mic, Save, FolderOpen } from 'lucide-react'
 
 export default function SermonWriteScreen() {
   const [title, setTitle] = useState('')
@@ -41,31 +37,26 @@ export default function SermonWriteScreen() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">📖 설교 작성</h1>
-      <Input 
+    <div style={{ maxWidth: 700, margin: '2rem auto' }}>
+      <h1 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>📖 설교 작성</h1>
+      <input
+        type="text"
         placeholder="제목을 입력하세요"
         value={title}
         onChange={e => setTitle(e.target.value)}
-        className="mb-3"
+        style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem' }}
       />
-      <Textarea
+      <textarea
         placeholder="말씀 내용을 입력하세요..."
         value={content}
         onChange={e => setContent(e.target.value)}
         rows={10}
-        className="mb-4"
+        style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem' }}
       />
-      <div className="flex gap-2">
-        <Button onClick={handleSave}>
-          <Save className="mr-2 h-4 w-4" /> 저장
-        </Button>
-        <Button onClick={handleLoad} variant="secondary">
-          <FolderOpen className="mr-2 h-4 w-4" /> 불러오기
-        </Button>
-        <Button onClick={handleSpeechToText} variant={recording ? 'destructive' : 'outline'}>
-          <Mic className="mr-2 h-4 w-4 animate-pulse" /> {recording ? '녹음 중...' : '🎙 음성입력'}
-        </Button>
+      <div style={{ display: 'flex', gap: '1rem' }}>
+        <button onClick={handleSave}>💾 저장</button>
+        <button onClick={handleLoad}>📂 불러오기</button>
+        <button onClick={handleSpeechToText}>{recording ? '🎙 녹음 중...' : '🎤 음성입력'}</button>
       </div>
     </div>
   )
